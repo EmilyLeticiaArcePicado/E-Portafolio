@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>E-Portafolio Interactivo | Recursos para el Aprendizaje II</title>
+    <!-- Font Awesome 6 (gratuito) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <!-- Google Fonts: Poppins + Open Sans -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Open Sans', sans-serif;
+        background: linear-gradient(145deg, #e6f4ea 0%, #d0e6df 100%);
+        color: #1e2f2c;
+        line-height: 1.5;
+        scroll-behavior: smooth;
+      }
+
+      .container {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(4px);
+        border-radius: 2rem;
+        box-shadow: 0 20px 35px -12px rgba(0, 32, 25, 0.2);
+        padding: 2rem;
+        margin-bottom: 2.5rem;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s;
+        border: 1px solid rgba(70, 130, 110, 0.2);
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 30px 40px -15px rgba(0, 50, 35, 0.25);
+      }
+
+      .portada {
+        background: linear-gradient(135deg, #0b3b2f, #1c6e5c);
+        color: white;
+        text-align: center;
+        border: none;
+      }
+      .portada h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        margin-bottom: 0.5rem;
+        font-family: 'Poppins', sans-serif;
+      }
+      .portada p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      h2 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.9rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        border-left: 7px solid #2c8c6e;
+        padding-left: 1rem;
+        color: #1b4e3f;
+      }
+      h3 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin: 1rem 0 0.75rem 0;
+        color: #2c6e5a;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .semana-badge {
+        background: #2c8c6e;
+        color: white;
+        border-radius: 40px;
+        padding: 0.2rem 1rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+      .icon-text {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 1rem 0 0.5rem;
+      }
+      .respuesta {
+        background: #f9fefb;
+        padding: 1rem 1.4rem;
+        border-radius: 1.2rem;
+        margin: 1rem 0;
+        border-left: 4px solid #2c8c6e;
+      }
+      .btn-detalle {
+        background: #eef3f0;
+        border: none;
+        padding: 0.6rem 1.2rem;
+        border-radius: 2rem;
+        font-weight: 600;
+        color: #1b6e58;
+        cursor: pointer;
+        transition: all 0.2s;
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+      }
+      .btn-detalle:hover {
+        background: #cfe8df;
+        transform: scale(0.97);
+      }
+      .detalle-extra {
+        display: none;
+        background: #f0f7f3;
+        padding: 1rem;
+        border-radius: 1.2rem;
+        margin-top: 1rem;
+        font-size: 0.95rem;
+      }
+      .grid-rubrica {
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+      th,
+      td {
+        padding: 0.9rem;
+        text-align: left;
+        border-bottom: 1px solid #d4e2db;
+      }
+      th {
+        background: #1b5e4c;
+        color: white;
+        font-weight: 600;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 2rem;
+        color: #2c5a4b;
+        font-size: 0.85rem;
+      }
+      i {
+        color: #2c8c6e;
+      }
+      @media (max-width: 700px) {
+        .container {
+          padding: 1rem;
+        }
+        .card {
+          padding: 1.2rem;
+        }
+        h2 {
+          font-size: 1.6rem;
+        }
+      }
+      .fade-in {
+        animation: fadeInUp 0.7s ease-out;
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- PORTADA -->
+      <div class="card portada fade-in">
+        <h1><i class="fas fa-chalkboard-user"></i> E-Portafolio de Evidencias</h1>
+        <p>Recursos para el Aprendizaje II | UTN, 2026</p>
+        <p style="margin-top: 1rem">
+          <i class="fas fa-user-graduate"></i> Estudiante: [Tu nombre] |
+          <i class="fas fa-calendar-alt"></i> Semestre 2026-2
+        </p>
+        <div style="margin-top: 1.2rem">
+          <span class="semana-badge"
+            ><i class="fas fa-lightbulb"></i> Innovación + Metacognición</span
+          >
+        </div>
+      </div>
+
+      <!-- INTRODUCCIÓN -->
+      <div class="card fade-in">
+        <h2><i class="fas fa-book-open"></i> Introducción</h2>
+        <p>
+          El presente portafolio digital evidencia el proceso de aprendizaje desarrollado durante el
+          curso, siguiendo las orientaciones docentes:
+          <strong>anecdotario semanal</strong> (reflexiones, logros, desafíos) y una
+          <strong>reflexión final</strong> con análisis metacognitivo. A través de una herramienta
+          tecnológica interactiva (blog enriquecido), muestro mis construcciones de conocimiento
+          sobre entornos virtuales, plataformas educativas, roles digitales y herramientas como
+          Blackboard, Classroom, Teams y Dokeos.
+        </p>
+        <p>
+          <i class="fas fa-check-circle"></i> Cada semana responde preguntas clave: ¿Qué aprendí?,
+          ¿cómo aplicarlo?, ¿qué profundizar? Además se incluyen detalles extras con botones
+          interactivos.
+        </p>
+      </div>
+
+      <!-- ======================== SEMANA 1 ======================== -->
+      <div class="card fade-in">
+        <h3><span class="semana-badge">Semana 1</span> Fundamentos de la educación virtual</h3>
+        <div class="icon-text">
+          <i class="fas fa-calendar-week"></i> <strong>Contenidos:</strong> Cronograma, educación
+          virtual vs remota, entornos virtuales, roles del profesor y estudiante,
+          ventajas/desventajas, evaluación por investigación, cursos autogestionados.
+        </div>
+
+        <div class="respuesta">
+          <i class="fas fa-brain"></i> <strong>¿Qué aprendí? ¿Qué no sabía?</strong><br />
+          Comprendí la diferencia clave entre <strong>educación virtual</strong> (diseñada para
+          entornos digitales con intencionalidad pedagógica) y
+          <strong>educación remota de emergencia</strong> (solución temporal). También identifiqué
+          que los cursos autogestionados ponen al estudiante como centro, fomentando autonomía.
+          Desconocía el impacto del rol del profesor como facilitador en entornos mediados por TIC.
+        </div>
+        <div class="respuesta">
+          <i class="fas fa-rocket"></i>
+          <strong>¿Cómo puedo aprovechar y aplicar lo aprendido?</strong><br />
+          Aplicaré estos conceptos al diseñar actividades en mi futura práctica docente, eligiendo
+          la modalidad adecuada según contexto. Por ejemplo, usar entornos virtuales bien
+          estructurados para fomentar aprendizaje colaborativo, y evitar trasladar modelos
+          presenciales sin adaptación.
+        </div>
+        <div class="respuesta">
+          <i class="fas fa-search"></i> <strong>¿Qué deberíamos retomar o profundizar?</strong
+          ><br />
+          Sería útil profundizar en estrategias de evaluación auténtica en entornos virtuales y en
+          cómo gestionar la motivación en cursos autogestionados. También herramientas de
+          seguimiento del aprendizaje.
+        </div>
+        <button class="btn-detalle" onclick="toggleDetalle('detalle1')">
+          <i class="fas fa-plus-circle"></i> Ver reflexión adicional
+        </button>
+        <div id="detalle1" class="detalle-extra">
+          🌱 <strong>Anécdota significativa:</strong> Durante la discusión en clase se confundían
+          "clase virtual" con "videollamada". El profesor aclaró que la virtualidad implica
+          ecosistemas de aprendizaje. Logré diferenciar LMS, videoconferencia y entornos personales
+          de aprendizaje.
+        </div>
+      </div>
+
+      <!-- ======================== SEMANA 2 (no asistió) ======================== -->
+      <div class="card fade-in">
+        <h3><span class="semana-badge">Semana 2</span> Ausencia</h3>
+        <div class="icon-text"><i class="fas fa-user-clock"></i> No asistí a la lección.</div>
+      </div>
+
+      <!-- ======================== SEMANA 3 ======================== -->
+      <div class="card fade-in">
+        <h3>
+          <span class="semana-badge">Semana 3</span> Plataformas educativas: Blackboard y Google
+          Classroom
+        </h3>
+        <div class="icon-text">
+          <i class="fas fa-laptop-code"></i> Presentaciones de compañeros: Blackboard (LMS clásico)
+          y Google Classroom.
+        </div>
+        <div class="respuesta">
+          <i class="fas fa-chalkboard"></i> <strong>¿Qué aprendí?</strong><br />
+          Google Classroom es gratuito para instituciones educativas, integra Google Apps for
+          Education (Drive, Docs, Calendar). Puede usarse con correo Gmail o institucional.
+          Blackboard es más robusto y orientado a universidades, con muchas herramientas de
+          evaluación. Aprendí a configurar una clase en Classroom y a crear tareas con rúbricas.
+        </div>
+        <div class="respuesta">
+          <i class="fas fa-tools"></i> <strong>Aplicación práctica:</strong><br />
+          Podré utilizar Classroom para dar seguimiento a proyectos colaborativos, simplificando la
+          entrega de tareas y retroalimentación. Blackboard lo exploraría en entornos corporativos o
+          de educación superior por su potencia analítica.
+        </div>
+        <div class="respuesta">
+          <i class="fas fa-question-circle"></i> <strong>¿Qué profundizar?</strong><br />
+          Sería excelente comparar funcionalidades de otras plataformas como Moodle, Canvas, y
+          también analizar la interoperabilidad con herramientas externas (LTI).
+        </div>
+        <button class="btn-detalle" onclick="toggleDetalle('detalle3')">
+          <i class="fas fa-microphone-alt"></i> Mi experiencia
+        </button>
+        <div id="detalle3" class="detalle-extra">
+          🎤 La exposición de mi compañera sobre Classroom me inspiró a crear un curso de prueba.
+          Descubrí que permite invitar a padres de familia y tiene una pestaña de "Trabajo de clase"
+          muy intuitiva. Además, el hecho de que esté en la nube facilita el acceso desde cualquier
+          dispositivo.
+        </div>
+      </div>
+
+      <!-- ======================== SEMANA 4 ======================== -->
+      <div class="card fade-in">
+        <h3>
+          <span class="semana-badge">Semana 4</span> Microsoft Teams + Dokeos (plataformas
+          colaborativas)
+        </h3>
+        <div class="icon-text">
+          <i class="fas fa-users"></i> Demostración de Teams por el profesor; tarea sobre
+          plataformas: conceptos, fechas de creación e imágenes. Compañeros explicaron Dokeos.
+        </div>
+        <div class="respuesta">
+          <i class="fas fa-video"></i> <strong>¿Qué aprendí?</strong><br />
+          Teams integra chat, videollamadas, canales, y se sincroniza con Office 365. Es ideal para
+          trabajo en equipo y clases híbridas. Por otro lado, <strong>Dokeos</strong> es un LMS de
+          código abierto creado en 2004, enfocado en formación corporativa y e-learning con
+          herramientas de autoría. Conocí su interfaz sencilla y sus orígenes belgas.
+        </div>
+        <div class="respuesta">
+          <i class="fas fa-briefcase"></i> <strong>¿Cómo aplicar?</strong><br />
+          Teams es perfecto para coordinar proyectos interdisciplinarios, grabar sesiones y
+          gestionar archivos. Dokeos podría ser útil en contextos empresariales donde se requiera
+          crear contenido SCORM rápidamente.
+        </div>
+        <div class="respuesta">
+          <i class="fas fa-gem"></i> <strong>Profundización sugerida</strong><br />
+          Explorar la analítica de aprendizaje que ofrecen Teams y Dokeos, y cómo se conectan con
+          herramientas de evaluación formativa.
+        </div>
+        <button class="btn-detalle" onclick="toggleDetalle('detalle4')">
+          <i class="fas fa-history"></i> Dato curioso: Dokeos
+        </button>
+        <div id="detalle4" class="detalle-extra">
+          📅 Dokeos surgió en 2004 en Bélgica, derivado de Claroline. En su momento fue innovador
+          por su autoría de cursos y sistema de certificación. Aunque hoy ha perdido popularidad
+          frente a Moodle, todavía se usa en varios centros de formación. Su lema: "aprendizaje
+          abierto y flexible".
+        </div>
+      </div>
+
+      <!-- REFLEXIÓN FINAL -->
+      <div class="card fade-in">
+        <h2>
+          <i class="fas fa-pen-fancy"></i> Reflexión final: Metacognición del proceso de aprendizaje
+        </h2>
+        <p>
+          El desarrollo de este portafolio me ha permitido transitar desde un conocimiento
+          superficial de los entornos virtuales hacia un análisis crítico de sus potencialidades y
+          limitaciones. A lo largo de las semanas, identifiqué tres logros clave:
+        </p>
+        <ul style="margin: 1rem 0 0 2rem">
+          <li>
+            <i class="fas fa-check"></i> <strong>Apropiación conceptual:</strong> Diferenciar
+            educación virtual, remota de emergencia, blended y autogestionada.
+          </li>
+          <li>
+            <i class="fas fa-check"></i> <strong>Competencia técnica:</strong> Explorar Classroom,
+            Teams y Dokeos, valorando su aplicabilidad en distintos niveles educativos.
+          </li>
+          <li>
+            <i class="fas fa-check"></i> <strong>Habilidad reflexiva:</strong> Responder a las
+            preguntas guía profundizando en “cómo aplicar” y “qué retomar” me obligó a pensar como
+            diseñador instruccional.
+          </li>
+        </ul>
+        <p style="margin-top: 1rem">
+          Los principales <strong>retos</strong> fueron ponerme al día tras la ausencia de la semana
+          2, lo cual solucioné con autogestión y consulta de materiales. También al principio me
+          costó seleccionar las herramientas tecnológicas más adecuadas para evidenciar el
+          aprendizaje; sin embargo, optar por este formato interactivo (HTML/CSS/JS) me permitió
+          mostrar originalidad y profundidad, alineado con las orientaciones del curso.
+        </p>
+        <p>
+          En cuanto a la <strong>metacognición</strong>, comprendo que aprender sobre LMS no es solo
+          memorizar nombres, sino entender las necesidades pedagógicas subyacentes. Por ejemplo,
+          mientras que Google Classroom destaca por su simplicidad, Teams ofrece sincronía avanzada
+          y Dokeos aporta modularidad. A futuro, profundizaré en la integración de herramientas con
+          analítica de aprendizaje y en el diseño de entornos inclusivos.
+        </p>
+        <div style="background: #eaf8f2; border-radius: 1rem; padding: 1rem; margin-top: 1rem">
+          <i class="fas fa-quote-left"></i>
+          <em
+            >“El portafolio no es solo una colección de trabajos, es la evidencia de mi evolución
+            como aprendiz en la era digital”</em
+          >
+          — reflexión personal.
+        </div>
+        <p style="margin-top: 1rem">
+          <strong>Compromiso:</strong> Implementar un mini-proyecto usando Teams con estudiantes
+          simulados y diseñar un curso autogestionado en Classroom antes de finalizar el semestre.
+        </p>
+      </div>
+
+      <!-- RÚBRICA DE EVALUACIÓN -->
+      <div class="card fade-in">
+        <h2><i class="fas fa-clipboard-list"></i> Rúbrica de evaluación (autoevaluación)</h2>
+        <div class="grid-rubrica">
+          <table>
+            <thead>
+              <tr>
+                <th>Criterio</th>
+                <th>Excelencia (6)</th>
+                <th>Valoración propia</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Presentación del portafolio</td>
+                <td>Requerimientos completos, creativo, formato adecuado, entrega a tiempo</td>
+                <td>
+                  ✔️ Logrado con excelencia: Formato digital interactivo, portada, introducción,
+                  reflexión final, enlace compartible. Creativo y ordenado.
+                </td>
+              </tr>
+              <tr>
+                <td>Proceso de elaboración</td>
+                <td>Evidencia el aprendizaje construido durante las semanas</td>
+                <td>
+                  ✔️ Logrado con excelencia: Cada semana desarrolla los tres momentos de reflexión
+                  con base en contenidos reales del curso.
+                </td>
+              </tr>
+              <tr>
+                <td>Calidad de las evidencias</td>
+                <td>Todas ordenadas, claras, con profundidad de análisis y aplicación</td>
+                <td>
+                  ✔️ Logrado con excelencia: Se presentan respuestas detalladas, ejemplos,
+                  aplicación práctica y preguntas de profundización.
+                </td>
+              </tr>
+              <tr>
+                <td>Reflexión final</td>
+                <td>Evidencia profundidad de análisis y metacognición</td>
+                <td>
+                  ✔️ Logrado con excelencia: Analiza logros, retos, cambios conceptuales y
+                  proyección futura.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top: 1rem; text-align: right">
+          <i class="fas fa-star"></i> Puntaje total estimado: <strong>24/24</strong> (100%) – según
+          criterios de la rúbrica.
+        </p>
+        <p>
+          <small
+            >✔️ El portafolio cumple con los requisitos: entrega en plataforma UTN / correo
+            kzamora@utn.ac.cr en las fechas indicadas (primera revisión semana 3, final semana
+            13).</small
+          >
+        </p>
+      </div>
+
+      <div class="footer">
+        <i class="fas fa-globe"></i> Portafolio desarrollado en HTML/CSS/JS | UTN Centro de
+        Formación Pedagógica | Agosto 2026 <br />
+        Evidencia interactiva para el curso Recursos para el Aprendizaje II.
+      </div>
+    </div>
+
+    <script>
+      function toggleDetalle(id) {
+        const elemento = document.getElementById(id);
+        if (elemento.style.display === 'none' || elemento.style.display === '') {
+          elemento.style.display = 'block';
+        } else {
+          elemento.style.display = 'none';
+        }
+      }
+      document.querySelectorAll('.detalle-extra').forEach((el) => (el.style.display = 'none'));
+    </script>
+  </body>
+</html>
